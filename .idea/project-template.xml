@@ -1,0 +1,3 @@
+<template>
+  <input-field default="com.brh.testproject.testproject">IJ_BASE_PACKAGE</input-field>
+</template>
