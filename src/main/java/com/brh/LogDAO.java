@@ -114,4 +114,5 @@ public class LogDAO {
         var calcResult = new CalcResult(price, platesCount, plateType);
         return logList.add( calcResult );
     }
+
 }
