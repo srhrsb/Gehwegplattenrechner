@@ -1,0 +1,161 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.brh.Controller",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_97816 { 
+   	label=brh
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   CalcResult948518955[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CalcResult</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   plateType: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   platesCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   timeStamp: LocalDateTime [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Controller948518955[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Controller</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   PLATESAREA: double[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   PLATESTYPE: String[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lengthTextField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   logDao: LogDAO [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   priceTextField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sizeMenu: ComboBox&lt;String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   widthTextField: TextField [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- getResultText(price: double, plates: int, plateIndex: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- getValueOfTextfield(tf: TextField): double</TD></TR>
+<TR><TD ALIGN="LEFT" >- initialize()</TD></TR>
+<TR><TD ALIGN="LEFT" ># onCalculateClick()</TD></TR>
+<TR><TD ALIGN="LEFT" ># onLogClearClick()</TD></TR>
+<TR><TD ALIGN="LEFT" ># onLogClick()</TD></TR>
+<TR><TD ALIGN="LEFT" >- showErrorWindow(title: String, message: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showInfoWindow(title: String, message: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showWindow(title: String, message: String, window: Alert)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+LogDAO948518955[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)LogDAO</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   LOGFILENAME: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   logList: ArrayList&lt;CalcResult&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addCalcToLog(price: double, platesCount: int, plateType: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ clearLogList()</TD></TR>
+<TR><TD ALIGN="LEFT" >- loadLogList(): ArrayList&lt;CalcResult&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ saveAllLogData()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Controller948518955 -> LogDAO948518955[label="logDao
+[0..1]"];
+LogDAO948518955 -> CalcResult948518955[label="logList
+[0..*]"];
+    
+}
+@enduml
