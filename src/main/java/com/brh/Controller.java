@@ -63,10 +63,16 @@ public class Controller {
     protected void onLogClick(){
          var logList = logDao.getLogList();
 
+         if( logList.isEmpty() ){
+            showInfoWindow("Info","Es sind noch keine Daten gespeichert im Log");
+            return;
+         }
+
          String text ="<// Log---------------//>\n";
 
          for( var log : logList){
              text += "Zeitstempel: "+log.getTimeStamp()+"\n";
+
              text += getResultText(log.getPrice(),
                          log.getPlatesCount(),
                          log.getPlateType()
@@ -75,6 +81,14 @@ public class Controller {
          }
 
          showInfoWindow("Log", text);
+    }
+
+    /**
+     * Bei Click auf "Log Löschen" aufgerufen, löscht Log
+     */
+    @FXML
+    protected void onLogClearClick(){
+        logDao.clearLogList();
     }
 
     /**
@@ -87,6 +101,8 @@ public class Controller {
         double value = 0;
         try{
             String text = tf.getText();
+            text = text.replace(",", ".");
+
             value = Double.parseDouble(text);
             if(value < 0){
                 throw new NumberFormatException();
@@ -99,7 +115,6 @@ public class Controller {
         return value;
     }
 
-
     /**
      * Zeigt eine Meldung in einem Infofenster an
      * @param title Titel des Fensters
@@ -107,6 +122,20 @@ public class Controller {
      */
     private void showInfoWindow(String title, String message){
         Alert window = new Alert(Alert.AlertType.INFORMATION);
+        showWindow(title, message, window);
+    }
+
+    /**
+     * Zeigt eine Meldung in einem Error fenster an
+     * @param title Titel des Fensters
+     * @param message Nachricht
+     */
+    private void showErrorWindow(String title, String message){
+        Alert window = new Alert(Alert.AlertType.ERROR);
+        showWindow(title, message, window);
+    }
+
+    private void showWindow(String title, String message, Alert window){
         window.setTitle(title);
         window.setHeaderText(null);
         window.setContentText( message );

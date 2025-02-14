@@ -115,4 +115,12 @@ public class LogDAO {
         return logList.add( calcResult );
     }
 
+    /**
+     * Log Liste löschen
+     */
+    public void clearLogList(){
+        logList.clear();
+        saveAllLogData();
+    }
+
 }
