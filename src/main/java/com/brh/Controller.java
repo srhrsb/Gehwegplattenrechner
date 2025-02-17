@@ -25,6 +25,8 @@ public class Controller {
     private void initialize(){
         sizeMenu.getItems().addAll(PLATESTYPE);
         logDao = new LogDAO();
+
+
     }
 
     /**

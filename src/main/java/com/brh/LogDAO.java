@@ -2,8 +2,10 @@ package com.brh;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LogDAO {
     private ArrayList<CalcResult> logList;
@@ -12,6 +14,7 @@ public class LogDAO {
 
     public LogDAO() {
         logList = loadLogList();
+        System.out.println( createUniqueId() );
     }
 
     /**
@@ -101,6 +104,25 @@ public class LogDAO {
     public ArrayList<CalcResult> getLogList(){
 
         return logList ;
+    }
+
+
+    /**
+     * Erstellt aus dem aktuellen Datum und einer 6 stelligen
+     * Zufallszahl eine ID
+     * @return ID
+     */
+
+    private String createUniqueId(){
+
+        //LocalDate today = new LocalDate.now();
+        LocalDate today = LocalDate.now();
+        int number = getRandomNumber(100000, 999999);
+        return today.toString()+number;
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
     /**
