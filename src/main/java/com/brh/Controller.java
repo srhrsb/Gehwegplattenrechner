@@ -6,7 +6,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class Controller {
-    private LogDAO logDao;
     @FXML
     private TextField lengthTextField;
     @FXML
@@ -24,9 +23,6 @@ public class Controller {
     @FXML
     private void initialize(){
         sizeMenu.getItems().addAll(PLATESTYPE);
-        logDao = new LogDAO();
-
-
     }
 
     /**
@@ -50,12 +46,11 @@ public class Controller {
          String text = getResultText(price, platesCount, plateType);
          showInfoWindow( "Ergebnis", text);
 
-         boolean success = logDao.addCalcToLog(price, platesCount, plateType);
+         boolean success = LogDAO.getInstance().addCalcToLog(price, platesCount, plateType);
 
          if(success){
-             logDao.saveAllLogData();
+             LogDAO.getInstance().saveAllLogData();
          }
-
     }
 
     /**
@@ -63,7 +58,7 @@ public class Controller {
      */
     @FXML
     protected void onLogClick(){
-         var logList = logDao.getLogList();
+         var logList = LogDAO.getInstance().getLogList();
 
          if( logList.isEmpty() ){
             showInfoWindow("Info","Es sind noch keine Daten gespeichert im Log");
@@ -90,7 +85,7 @@ public class Controller {
      */
     @FXML
     protected void onLogClearClick(){
-        logDao.clearLogList();
+        LogDAO.getInstance().clearLogList();
     }
 
     /**

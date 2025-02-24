@@ -11,11 +11,26 @@ public class LogDAO {
     private ArrayList<CalcResult> logList;
     private String LOGFILENAME ="log.csv";
 
+    private static LogDAO instance;
 
-    public LogDAO() {
+    private LogDAO() {
         logList = loadLogList();
         System.out.println( createUniqueId() );
     }
+
+    public static LogDAO getInstance(){
+
+        if( instance == null){
+            instance = new LogDAO();
+        }
+
+        return instance;
+
+    }
+
+
+
+
 
     /**
      * Speichert die Liste mit den Logs

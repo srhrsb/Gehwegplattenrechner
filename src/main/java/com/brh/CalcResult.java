@@ -37,4 +37,8 @@ public class CalcResult {
     public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
+
+    public static void example() {
+
+    }
 }
