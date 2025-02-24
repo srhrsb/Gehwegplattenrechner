@@ -13,9 +13,11 @@ public class Controller {
     @FXML
     private TextField priceTextField;
     @FXML
+    private TextField projectNameTextField;
+    @FXML
     private ComboBox<String> sizeMenu;
-    private final double[] PLATESAREA = { 0.06, 0.16, 0.25, 0.24  };
-    private final String[] PLATESTYPE = { "20x30", "40x40", "50x50", "40x60" };
+    private final double[] PLATESAREA = { 0.06, 0.16, 0.25, 0.24, 0.24 };
+    private final String[] PLATESTYPE = { "20x30", "40x40", "50x50", "40x60", "80x30" };
 
     /**
      * Wird vom Java FX Framework ausgeführt bei Start des Controllers
@@ -31,6 +33,7 @@ public class Controller {
     @FXML
     protected void onCalculateClick() {
 
+         String projectName = projectNameTextField.getText();
          double width = getValueOfTextfield(widthTextField);
          double length = getValueOfTextfield(lengthTextField);
          double pricePerSquareMeter = getValueOfTextfield(priceTextField);
@@ -43,10 +46,10 @@ public class Controller {
          double price = pricePerSquareMeter * area;
          int platesCount = (int) Math.ceil(area / areaPerPlate);
 
-         String text = getResultText(price, platesCount, plateType);
+         String text = getResultText(price, platesCount, plateType, projectName);
          showInfoWindow( "Ergebnis", text);
 
-         boolean success = LogDAO.getInstance().addCalcToLog(price, platesCount, plateType);
+         boolean success = LogDAO.getInstance().addCalcToLog(price, platesCount, plateType, projectName);
 
          if(success){
              LogDAO.getInstance().saveAllLogData();
@@ -72,7 +75,8 @@ public class Controller {
 
              text += getResultText(log.getPrice(),
                          log.getPlatesCount(),
-                         log.getPlateType()
+                         log.getPlateType(),
+                         log.getProjectName()
                      );
              text+="\n\n";
          }
@@ -146,11 +150,12 @@ public class Controller {
      * @param plates Plattenanzahl
      * @return
      */
-    private String getResultText( double price, int plates, int plateIndex ){
+    private String getResultText( double price, int plates, int plateIndex, String projectName ){
         String text = "Es wurde folgendes berechnet:\n";
-        text+= "  Plattentyp: " + PLATESTYPE[plateIndex]+"\n";
+        text+= "  Projektname:    " + projectName +"\n";
+        text+= "  Plattentyp:     " + PLATESTYPE[plateIndex]+"\n";
         text+= "  Anzahl Platten: "+plates+"\n";
-        text+= "  Gesamtpreis: "+ price;
+        text+= "  Gesamtpreis:    "+ price;
         return text;
     }
 }

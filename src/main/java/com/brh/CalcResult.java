@@ -6,20 +6,23 @@ public class CalcResult {
     private int plateType;
     private double price;
     private int platesCount;
+    private String projectName;
     private LocalDateTime timeStamp;
 
-    public CalcResult( double price, int platesCount, int plateType) {
+    public CalcResult( double price, int platesCount, int plateType, String projectName) {
         this.plateType = plateType;
         this.price = price;
         this.platesCount = platesCount;
         timeStamp = LocalDateTime.now();
+        this.projectName = projectName;
     }
 
-    public CalcResult(double price, int platesCount, int plateType, LocalDateTime timeStamp) {
+    public CalcResult(double price, int platesCount, int plateType, String projectName, LocalDateTime timeStamp) {
         this.plateType = plateType;
         this.price = price;
         this.platesCount = platesCount;
         this.timeStamp = timeStamp;
+        this.projectName = projectName;
     }
 
     public int getPlateType() {
@@ -38,7 +41,7 @@ public class CalcResult {
         return timeStamp;
     }
 
-    public static void example() {
-
+    public String getProjectName() {
+        return projectName;
     }
 }

@@ -46,7 +46,8 @@ public class LogDAO {
                     String line = item.getPrice()+","
                                   +item.getPlatesCount()+","
                                   +item.getPlateType()+","
-                                  +item.getTimeStamp()+"\n";
+                                  +item.getTimeStamp()+","
+                                  +item.getProjectName()+"\n";
                     System.out.println(line);
                     writer.write(line);
                 }
@@ -90,8 +91,9 @@ public class LogDAO {
                 int platesCount = Integer.parseInt(data[1]);
                 int plateType = Integer.parseInt(data[2]);
                 LocalDateTime date = LocalDateTime.parse(data[3]);
+                String projectName = data[4];
 
-                CalcResult result = new CalcResult(price, platesCount, plateType, date );
+                CalcResult result = new CalcResult(price, platesCount, plateType, projectName, date );
                 logList.add(result);
 
             }
@@ -147,8 +149,8 @@ public class LogDAO {
      * @param plateType Plattentyp
      * @return Erfolgsmeldung
      */
-    public boolean addCalcToLog(double price, int platesCount, int plateType){
-        var calcResult = new CalcResult(price, platesCount, plateType);
+    public boolean addCalcToLog(double price, int platesCount, int plateType, String projectName){
+        var calcResult = new CalcResult(price, platesCount, plateType, projectName);
         return logList.add( calcResult );
     }
 
